@@ -21,7 +21,28 @@ npm install --save react-substring
 ## Usage
 
 ```js
-...
+import React from 'react';
+import Substring from 'react-substring';
+
+const RedString = ({ children }) => <span style={{ color: 'red' }}>{children}</span>;
+
+const DemoComponent = () => (
+    <Substring
+        substrings={[
+            {
+                match: new RegExp('simple', 'gi'),
+                component: 'b',
+            },
+            {
+                match: 'code',
+                caseSensitive: true,
+                component: RedString,
+            },
+        ]}
+    >
+        This is simple code.
+    </Substring>
+);
 ```
 
 ## License
