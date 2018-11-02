@@ -1,0 +1,111 @@
+{
+    "name": "react-substring",
+    "version": "0.1.0",
+    "description": "...",
+    "author": "Avin Grape <carcinogen75@gmail.com> (https://github.com/avin/)",
+    "contributors": [
+        "Avin Grape <carcinogen75@gmail.com> (https://github.com/avin/)"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/avin/react-substring",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/avin/react-substring"
+    },
+    "bugs": {
+        "url": "https://github.com/avin/react-substring/issues"
+    },
+    "engines": {
+        "node": ">8.0.0"
+    },
+    "keywords": [
+        "react",
+        "reactjs",
+        "substring",
+        "replace"
+    ],
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.esm.js",
+    "files": [
+        "dist",
+        "src/*.js",
+        "README.md"
+    ],
+    "scripts": {
+        "build": "rimraf dist && mkdir dist && yarn build:flow && yarn build:source",
+        "build:demo": "build-storybook -o demo",
+        "build:flow": "cpr flow-template dist/index.cjs.js.flow && cpr flow-template dist/index.esm.js.flow",
+        "build:source": "rollup -c",
+        "deploy": "rimraf demo && npm run build:demo && gh-pages -d demo -r https://github.com/avin/react-substring",
+        "flow": "flow check --max-warnings=0 src && flow check website",
+        "linc": "lint-staged",
+        "lint": "eslint '**/*.js'",
+        "precommit": "lint-staged",
+        "prepare": "yarn run build",
+        "postpublish": "npm run deploy",
+        "prettier": "prettier --write \"**/*.{js,json,css}\"",
+        "start": "rollup -c -w",
+        "storybook": "start-storybook -p 9009",
+        "test": "cross-env CI=1 react-scripts test --env=jsdom",
+        "test:watch": "react-scripts test --env=jsdom"
+    },
+    "lint-staged": {
+        "{website,src}/**/*.{js,json,css}": [
+            "prettier --write",
+            "git add"
+        ],
+        "**/*.js": "eslint --max-warnings 0"
+    },
+    "dependencies": {
+        "@babel/runtime": "^7.0.0",
+        "lodash.escaperegexp": "^4.1.2"
+    },
+    "peerDependencies": {
+        "react": "^15.0.0 || ^16.0.0",
+        "react-dom": "^15.0.0 || ^16.0.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.0.0",
+        "@babel/plugin-proposal-class-properties": "^7.0.0",
+        "@babel/plugin-transform-runtime": "^7.0.0",
+        "@babel/preset-env": "^7.0.0",
+        "@babel/preset-flow": "^7.0.0",
+        "@babel/preset-react": "^7.0.0",
+        "@storybook/addon-actions": "^4.0.2",
+        "@storybook/addon-links": "^4.0.2",
+        "@storybook/addons": "^4.0.2",
+        "@storybook/react": "^4.0.2",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-eslint": "^10.0.1",
+        "babel-loader": "^8.0.4",
+        "babel-plugin-annotate-pure-calls": "^0.4.0",
+        "cpr": "^3.0.1",
+        "cross-env": "^5.1.4",
+        "eslint": "^5.8.0",
+        "eslint-config-prettier": "^3.1.0",
+        "eslint-config-react-app": "^3.0.5",
+        "eslint-config-standard": "^12.0.0",
+        "eslint-config-standard-react": "^7.0.2",
+        "eslint-plugin-flowtype": "^3.2.0",
+        "eslint-plugin-import": "^2.11.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-node": "^8.0.0",
+        "eslint-plugin-prettier": "^3.0.0",
+        "eslint-plugin-promise": "^4.0.1",
+        "eslint-plugin-react": "^7.7.0",
+        "eslint-plugin-standard": "^4.0.0",
+        "flow-bin": "^0.85.0",
+        "gh-pages": "^2.0.1",
+        "lint-staged": "^8.0.4",
+        "prettier": "^1.12.1",
+        "react": "^16.5.1",
+        "react-dom": "^16.5.1",
+        "react-scripts": "^2.1.1",
+        "react-test-renderer": "^16.4.0",
+        "rimraf": "^2.6.2",
+        "rollup": "^0.66.6",
+        "rollup-plugin-babel": "^4.0.2",
+        "rollup-plugin-commonjs": "^9.2.0",
+        "rollup-plugin-node-resolve": "^3.0.2"
+    }
+}
