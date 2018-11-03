@@ -45,6 +45,23 @@ const DemoComponent = () => (
 );
 ```
 
+## API
+
+#### Props
+
+| Property   | Type             | Required? | Description                 |
+| :--------- | :--------------- | :-------: | :-------------------------- |
+| substrings | Array<Substring> |     ✓     | Array on Substring objects. |
+
+#### Substring object fields
+
+| Field name    | Type                      | Required? | Description                                                                                        |
+| :------------ | :------------------------ | :-------: | :------------------------------------------------------------------------------------------------- |
+| match         | RegExp or String          |     ✓     | Substring pattern to replace.                                                                      |
+| component     | React.Component or String |     ✓     | React component or tag name taking matching content.                                               |
+| caseSensitive | Bool                      |           | If use match as string - it allows to switch on case sensitive search substring (Default: `false`) |
+| props         | Object                    |           | Additional props for matching component (can use `style`, `className` or something else)           |
+
 ## License
 
 MIT © [avin](https://github.com/avin)

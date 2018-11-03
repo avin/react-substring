@@ -1,28 +1,29 @@
-// @flow
-
 import React from 'react';
 import escapeRegExp from 'lodash.escaperegexp';
+import PropTypes from 'prop-types';
 
-type SubstringObject = {
-    match: string | RegExp,
-    component: React.Component,
-    caseSensitive?: boolean,
-};
-
-type Props = {
-    /** Content string to search substrings.*/
-    children: string,
-    substrings: Array<SubstringObject>,
-};
-
-export default class Substring extends React.Component<Props> {
+export default class Substring extends React.Component {
+    static propTypes = {
+        children: PropTypes.string,
+        substrings: PropTypes.arrayOf(
+            PropTypes.shape({
+                match: PropTypes.oneOfType([PropTypes.instanceOf(RegExp), PropTypes.string]).isRequired,
+                component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+                caseSensitive: PropTypes.bool,
+                style: PropTypes.object,
+                className: PropTypes.string,
+            }),
+        ),
+    };
     render() {
         const { children: content, substrings } = this.props;
 
         let contentParts = [content];
 
         let key = 0;
-        substrings.forEach(({ match, component: Component, caseSensitive }) => {
+        substrings.forEach(({ match, component: Component, caseSensitive, props }) => {
+            props = props || {};
+
             if (!Array.isArray(match)) {
                 match = [match];
             }
@@ -55,7 +56,12 @@ export default class Substring extends React.Component<Props> {
                             startIndex = to;
                             lastIndex = to;
 
-                            midResult = [...midResult, <Component key={key++}>{matchSubstring}</Component>];
+                            midResult = [
+                                ...midResult,
+                                <Component key={key++} {...props}>
+                                    {matchSubstring}
+                                </Component>,
+                            ];
                         }
                         const afterString = contentPart.slice(lastIndex);
                         if (afterString) {
@@ -68,8 +74,6 @@ export default class Substring extends React.Component<Props> {
                 contentParts = midResult;
             });
         });
-
-        console.log(contentParts);
 
         return <span>{contentParts}</span>;
     }
