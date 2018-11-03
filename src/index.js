@@ -4,16 +4,25 @@ import PropTypes from 'prop-types';
 
 export default class Substring extends React.PureComponent {
     static propTypes = {
+        /**  Main content as string */
         children: PropTypes.string,
+
+        /**  Array on Substring objects */
         substrings: PropTypes.arrayOf(
             PropTypes.shape({
+                /** Pattern to search substrings for processing */
                 match: PropTypes.oneOfType([PropTypes.instanceOf(RegExp), PropTypes.string]).isRequired,
+
+                /** React component or tag name taking matching content. (Default tag `mark`) */
                 component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+
+                /** If use match as string - it allows to switch on case sensitive search substring (Default: `false`) */
                 caseSensitive: PropTypes.bool,
-                style: PropTypes.object,
-                className: PropTypes.string,
+
+                /** Additional props for matching component (can use `style`, `className` or something else) */
+                props: PropTypes.object,
             }),
-        ),
+        ).isRequired,
     };
 
     render() {
@@ -24,6 +33,7 @@ export default class Substring extends React.PureComponent {
         let key = 0;
         substrings.forEach(({ match, component: Component, caseSensitive, props }) => {
             props = props || {};
+            Component = Component || 'mark';
 
             if (!Array.isArray(match)) {
                 match = [match];
@@ -31,7 +41,7 @@ export default class Substring extends React.PureComponent {
 
             match.forEach(matchItem => {
                 let midResult = [];
-                contentParts.forEach((contentPart) => {
+                contentParts.forEach(contentPart => {
                     //Work only with string - another ones are React elements
                     if (typeof contentPart === 'string') {
                         if (typeof matchItem === 'string') {

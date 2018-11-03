@@ -1,9 +1,11 @@
 {
     "name": "react-substring",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "...",
     "author": "Avin Grape <carcinogen75@gmail.com> (https://github.com/avin/)",
-    "contributors": ["Avin Grape <carcinogen75@gmail.com> (https://github.com/avin/)"],
+    "contributors": [
+        "Avin Grape <carcinogen75@gmail.com> (https://github.com/avin/)"
+    ],
     "license": "MIT",
     "homepage": "https://github.com/avin/react-substring",
     "repository": {
@@ -16,10 +18,19 @@
     "engines": {
         "node": ">8.0.0"
     },
-    "keywords": ["react", "reactjs", "substring", "replace"],
+    "keywords": [
+        "react",
+        "reactjs",
+        "substring",
+        "replace"
+    ],
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.js",
-    "files": ["dist", "src/*.js", "README.md"],
+    "files": [
+        "dist",
+        "src/*.js",
+        "README.md"
+    ],
     "scripts": {
         "build": "rimraf dist && mkdir dist && yarn build:flow && yarn build:source",
         "build:demo": "build-storybook -o demo",
@@ -39,11 +50,15 @@
         "test:watch": "react-scripts test --env=jsdom"
     },
     "lint-staged": {
-        "{website,src}/**/*.{js,json,css}": ["prettier --write", "git add"],
+        "{website,src}/**/*.{js,json,css}": [
+            "prettier --write",
+            "git add"
+        ],
         "**/*.js": "eslint --max-warnings 0"
     },
     "dependencies": {
         "@babel/runtime": "^7.0.0",
+        "@storybook/addon-info": "^4.0.2",
         "lodash.escaperegexp": "^4.1.2"
     },
     "peerDependencies": {
@@ -51,10 +66,6 @@
         "react-dom": "^15.0.0 || ^16.0.0"
     },
     "devDependencies": {
-        "enzyme": "^3.7.0",
-        "enzyme-adapter-react-16": "^1.6.0",
-        "eslint-config-prettier": "^3.1.0",
-        "prop-types": "^15.6.2",
         "@babel/core": "^7.0.0",
         "@babel/plugin-proposal-class-properties": "^7.0.0",
         "@babel/plugin-transform-runtime": "^7.0.0",
@@ -70,10 +81,14 @@
         "babel-plugin-annotate-pure-calls": "^0.3.0",
         "cpr": "^3.0.1",
         "cross-env": "^5.1.4",
+        "enzyme": "^3.7.0",
+        "enzyme-adapter-react-16": "^1.6.0",
+        "eslint-config-prettier": "^3.1.0",
         "flow-bin": "^0.80.0",
         "gh-pages": "^1.1.0",
         "lint-staged": "^7.0.5",
         "prettier": "^1.12.1",
+        "prop-types": "^15.6.2",
         "react": "^16.5.1",
         "react-dom": "^16.5.1",
         "react-scripts": "^1.1.1",

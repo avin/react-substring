@@ -26,6 +26,9 @@ storiesOf('react-substring', module).add('simple-demo', () => {
                                 component: GreenString,
                             },
                             {
+                                match: new RegExp('Just', 'g'),
+                            },
+                            {
                                 match: 'string',
                                 caseSensitive: true,
                                 component: UpperCaseString,
