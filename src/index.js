@@ -2,7 +2,7 @@ import React from 'react';
 import escapeRegExp from 'lodash.escaperegexp';
 import PropTypes from 'prop-types';
 
-export default class Substring extends React.Component {
+export default class Substring extends React.PureComponent {
     static propTypes = {
         children: PropTypes.string,
         substrings: PropTypes.arrayOf(
@@ -15,6 +15,7 @@ export default class Substring extends React.Component {
             }),
         ),
     };
+
     render() {
         const { children: content, substrings } = this.props;
 
@@ -30,8 +31,8 @@ export default class Substring extends React.Component {
 
             match.forEach(matchItem => {
                 let midResult = [];
-                contentParts.forEach((contentPart, idx) => {
-                    //Обрабатываем только строки - остальные части это реакторвские объекты
+                contentParts.forEach((contentPart) => {
+                    //Work only with string - another ones are React elements
                     if (typeof contentPart === 'string') {
                         if (typeof matchItem === 'string') {
                             let modificators = 'g';
@@ -50,25 +51,24 @@ export default class Substring extends React.Component {
 
                             const beforeString = contentPart.slice(startIndex, from);
                             if (beforeString) {
-                                midResult = [...midResult, beforeString];
+                                midResult.push(beforeString);
                             }
                             const matchSubstring = contentPart.slice(from, to);
                             startIndex = to;
                             lastIndex = to;
 
-                            midResult = [
-                                ...midResult,
+                            midResult.push(
                                 <Component key={key++} {...props}>
                                     {matchSubstring}
                                 </Component>,
-                            ];
+                            );
                         }
                         const afterString = contentPart.slice(lastIndex);
                         if (afterString) {
-                            midResult = [...midResult, afterString];
+                            midResult.push(afterString);
                         }
                     } else {
-                        midResult = [...midResult, contentPart];
+                        midResult.push(contentPart);
                     }
                 });
                 contentParts = midResult;
