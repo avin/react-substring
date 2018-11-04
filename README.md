@@ -36,17 +36,21 @@ const DemoComponent = () => (
     <Substring
         substrings={[
             {
-                match: new RegExp('simple', 'gi'),
+                match: new RegExp('Decorate', 'gi'),
                 component: 'b',
             },
             {
-                match: 'code',
+                match: 'custom',
                 caseSensitive: true,
                 component: RedString,
             },
+            {
+                match: ['just', 'some', /className/gi],
+                props: { style: { backgroundColor: 'red' } },
+            },
         ]}
     >
-        This is simple code.
+        Decorate substrings with custom components or just add some style or className to them
     </Substring>
 );
 ```
@@ -55,16 +59,19 @@ const DemoComponent = () => (
 
 #### Props
 
-| Property   | Type             | Required? | Description                 |
-| :--------- | :--------------- | :-------: | :-------------------------- |
-| substrings | Array<Substring> |     ✓     | Array on Substring objects. |
+| Property     | Type             | Required? | Description                                                                                        |
+| :----------- | :--------------- | :-------: | :------------------------------------------------------------------------------------------------- |
+| substrings   | Array<Substring> |     ✓     | Array on Substring objects.                                                                        |
+| outerTagName | String           |           | Tag name passed to document.createElement to create the outer container element. (Default: `span`) |
+| style        | Object           |           | Optional inline style to attach to outermost element.                                              |
+| className    | Object           |           | Optional inline style to attach to outermost element.                                              |
 
 #### Substring object fields
 
 | Field name    | Type                      | Required? | Description                                                                                        |
 | :------------ | :------------------------ | :-------: | :------------------------------------------------------------------------------------------------- |
-| match         | RegExp or String          |     ✓     | Pattern to search substrings for processing.                                                       |
-| component     | React.Component or String |           | React component or tag name taking matching content. (Default tag `mark`)                          |
+| match         | RegExp or String          |     ✓     | Pattern to search substrings for processing. Can use array of patterns here.                       |
+| component     | React.Component or String |           | React component or tag name taking matching content. (Default: `mark`)                             |
 | caseSensitive | Bool                      |           | If use match as string - it allows to switch on case sensitive search substring (Default: `false`) |
 | props         | Object                    |           | Additional props for matching component (can use `style`, `className` or something else)           |
 

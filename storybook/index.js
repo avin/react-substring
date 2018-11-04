@@ -33,6 +33,10 @@ storiesOf('react-substring', module).add('simple-demo', () => {
                                 caseSensitive: true,
                                 component: UpperCaseString,
                             },
+                            {
+                                match: ['you', 'works'],
+                                props: { style: { backgroundColor: 'red' } },
+                            },
                         ]}
                     >
                         This is sample [string String stRing]! Just to show you how it works.

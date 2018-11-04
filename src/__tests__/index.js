@@ -151,3 +151,20 @@ test('Pass additional props to matching component', () => {
     expect(matchingElement.hasClass('TheClassName')).toEqual(true);
     expect(matchingElement.prop('style')).toEqual({ fontSize: '18px' });
 });
+
+test('Pass some match values as array', () => {
+    let element = mount(
+        <Substring
+            substrings={[
+                {
+                    match: ['aaa','zzz'],
+                    component: 'b',
+                },
+            ]}
+        >
+            aaazzzqqqggg
+        </Substring>,
+    );
+
+    expect(element.find('b')).toHaveLength(2);
+});

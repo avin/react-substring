@@ -11,7 +11,11 @@ export default class Substring extends React.PureComponent {
         substrings: PropTypes.arrayOf(
             PropTypes.shape({
                 /** Pattern to search substrings for processing */
-                match: PropTypes.oneOfType([PropTypes.instanceOf(RegExp), PropTypes.string]).isRequired,
+                match: PropTypes.oneOfType([
+                    PropTypes.instanceOf(RegExp),
+                    PropTypes.string,
+                    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.instanceOf(RegExp), PropTypes.string])),
+                ]).isRequired,
 
                 /** React component or tag name taking matching content. (Default tag `mark`) */
                 component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -23,11 +27,22 @@ export default class Substring extends React.PureComponent {
                 props: PropTypes.object,
             }),
         ).isRequired,
+
+        /** Tag name passed to document.createElement to create the outer container element. */
+        outerTagName: PropTypes.string,
+
+        /** Optional inline style to attach to outermost element. */
+        style: PropTypes.object,
+
+        /** Optional CSS class to attach to outermost element. */
+        className: PropTypes.object,
     };
 
-    render() {
-        const { children: content, substrings } = this.props;
+    static defaultProps = {
+        outerTagName: 'span',
+    };
 
+    processContent(content, substrings) {
         let contentParts = [content];
 
         let key = 0;
@@ -85,6 +100,16 @@ export default class Substring extends React.PureComponent {
             });
         });
 
-        return <span>{contentParts}</span>;
+        return contentParts;
+    }
+
+    render() {
+        const { children: content, substrings, className, style, outerTagName: ResultComponent } = this.props;
+
+        return (
+            <ResultComponent className={className} style={style}>
+                {this.processContent(content, substrings)}
+            </ResultComponent>
+        );
     }
 }
