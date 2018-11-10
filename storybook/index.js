@@ -9,6 +9,7 @@ const GreenString = ({ children }) => <span style={{ color: 'lightgreen' }}>{chi
 storiesOf('react-substring', module).add('simple-demo', () => {
     return (
         <div className="container">
+            <div style={{marginBottom: 20}}><a href="https://github.com/avin/react-substring/blob/master/storybook/index.js">Source code here!</a></div>
             <div>
                 <span>
                     <Substring
