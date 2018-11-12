@@ -19,7 +19,7 @@ test('Allow to use regexp and react components', () => {
             ]}
         >
             This is simple code.
-        </Substring>,
+        </Substring>
     );
 
     expect(element.find('.FooComponent').text()).toEqual('simple');
@@ -36,7 +36,7 @@ test('Allow to use strings', () => {
             ]}
         >
             This is simple code.
-        </Substring>,
+        </Substring>
     );
 
     expect(element.find('b').text()).toEqual('simple');
@@ -57,7 +57,7 @@ test('Allow to use both', () => {
             ]}
         >
             This is simple code.
-        </Substring>,
+        </Substring>
     );
 
     expect(element.find('b').text()).toEqual('This');
@@ -75,7 +75,7 @@ test('Keep another content', () => {
             ]}
         >
             zzzaaa
-        </Substring>,
+        </Substring>
     );
 
     expect(element.text()).toEqual('zzzaaa');
@@ -92,7 +92,7 @@ test('Keep another content', () => {
             ]}
         >
             zzzaaa
-        </Substring>,
+        </Substring>
     );
 
     expect(element.text()).toEqual('zzzaaa');
@@ -110,7 +110,7 @@ test('Use caseSensitive', () => {
             ]}
         >
             AAA aaa
-        </Substring>,
+        </Substring>
     );
 
     expect(element.find('b')).toHaveLength(2);
@@ -126,7 +126,7 @@ test('Use caseSensitive', () => {
             ]}
         >
             AAA aaa
-        </Substring>,
+        </Substring>
     );
 
     expect(element.find('b')).toHaveLength(1);
@@ -144,7 +144,7 @@ test('Pass additional props to matching component', () => {
             ]}
         >
             aaazzz
-        </Substring>,
+        </Substring>
     );
 
     const matchingElement = element.find('b');
@@ -157,14 +157,48 @@ test('Pass some match values as array', () => {
         <Substring
             substrings={[
                 {
-                    match: ['aaa','zzz'],
+                    match: ['aaa', 'zzz'],
                     component: 'b',
                 },
             ]}
         >
             aaazzzqqqggg
-        </Substring>,
+        </Substring>
     );
 
     expect(element.find('b')).toHaveLength(2);
+});
+
+test('it is ok when no matches', () => {
+    let element = mount(
+        <Substring
+            substrings={[
+                {
+                    match: 'foo',
+                    component: 'b',
+                },
+            ]}
+        >
+            no mathes
+        </Substring>
+    );
+
+    expect(element.find('b')).toHaveLength(0);
+});
+
+test('blank string match is ok', () => {
+    let element = mount(
+        <Substring
+            substrings={[
+                {
+                    match: '',
+                    component: 'b',
+                },
+            ]}
+        >
+            foo bar azz
+        </Substring>
+    );
+
+    expect(element.find('b')).toHaveLength(0);
 });

@@ -55,6 +55,9 @@ export default class Substring extends React.PureComponent {
             }
 
             match.forEach(matchItem => {
+                if (!matchItem){
+                    return;
+                }
                 let midResult = [];
                 contentParts.forEach(contentPart => {
                     //Work only with string - another ones are React elements
