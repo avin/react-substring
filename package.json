@@ -1,6 +1,6 @@
 {
     "name": "react-substring",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "...",
     "author": "Avin Grape <carcinogen75@gmail.com> (https://github.com/avin/)",
     "contributors": [
@@ -47,7 +47,8 @@
         "start": "rollup -c -w",
         "storybook": "start-storybook -p 9009",
         "test": "cross-env CI=1 react-scripts test --env=jsdom",
-        "test:watch": "react-scripts test --env=jsdom"
+        "test:watch": "react-scripts test --env=jsdom",
+        "test:debug": "react-scripts --inspect --inspect-brk test --env=jsdom --runInBand"
     },
     "lint-staged": {
         "{website,src}/**/*.{js,json,css}": [

@@ -202,3 +202,20 @@ test('blank string match is ok', () => {
 
     expect(element.find('b')).toHaveLength(0);
 });
+
+test('math without lastIndex', () => {
+    let element = mount(
+        <Substring
+            substrings={[
+                {
+                    match: new RegExp('\\[[ ]*(([\\dA-F]{2}[ ]*)*)]'),
+                    component: 'b',
+                },
+            ]}
+        >
+            The string [53 30 15] azz
+        </Substring>
+    );
+
+    expect(element.find('b')).toHaveLength(1);
+});

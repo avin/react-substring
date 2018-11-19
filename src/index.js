@@ -25,7 +25,7 @@ export default class Substring extends React.PureComponent {
 
                 /** Additional props for matching component (can use `style`, `className` or something else) */
                 props: PropTypes.object,
-            }),
+            })
         ).isRequired,
 
         /** Tag name passed to document.createElement to create the outer container element. */
@@ -55,7 +55,7 @@ export default class Substring extends React.PureComponent {
             }
 
             match.forEach(matchItem => {
-                if (!matchItem){
+                if (!matchItem) {
                     return;
                 }
                 let midResult = [];
@@ -73,9 +73,19 @@ export default class Substring extends React.PureComponent {
                         let matchResult;
                         let startIndex = 0;
                         let lastIndex = 0;
+                        let prevFrom;
                         while ((matchResult = matchItem.exec(contentPart))) {
                             const from = matchResult.index;
-                            const to = matchItem.lastIndex;
+                            if (prevFrom === undefined) {
+                                prevFrom = from;
+                            } else {
+                                if (prevFrom === from) {
+                                    break;
+                                } else {
+                                    prevFrom = from;
+                                }
+                            }
+                            const to = matchItem.lastIndex || from + matchResult[0].length;
 
                             const beforeString = contentPart.slice(startIndex, from);
                             if (beforeString) {
@@ -88,7 +98,7 @@ export default class Substring extends React.PureComponent {
                             midResult.push(
                                 <Component key={key++} {...props}>
                                     {matchSubstring}
-                                </Component>,
+                                </Component>
                             );
                         }
                         const afterString = contentPart.slice(lastIndex);
