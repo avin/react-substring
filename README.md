@@ -2,7 +2,9 @@
 
 > Decorating substrings with components. Useful to highlight something in your text content.
 
-[![NPM registry](https://img.shields.io/npm/v/react-substring.svg?style=for-the-badge)](https://yarnpkg.com/en/package/react-substring) [![NPM license](https://img.shields.io/badge/license-mit-red.svg?style=for-the-badge)](LICENSE)
+[![NPM registry](https://img.shields.io/npm/v/react-substring.svg?style=for-the-badge)](https://yarnpkg.com/en/package/react-substring)
+![](https://img.shields.io/travis/:avin/:react-substring.svg?style=for-the-badge) 
+[![NPM license](https://img.shields.io/badge/license-mit-red.svg?style=for-the-badge)](LICENSE)
 
 ## Demo
 
